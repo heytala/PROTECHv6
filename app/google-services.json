@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "473943779624",
+    "firebase_url": "https://protech-81712-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "protech-81712",
+    "storage_bucket": "protech-81712.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473943779624:android:87ba29cefc1206a4a0c81d",
+        "android_client_info": {
+          "package_name": "com.example.protechv6"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473943779624-ls4cfi7gn8g48o0ioc15nl0au0ukvvuj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqE06oks-q3-9Q6-kozoeblHgEcblNt40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473943779624-ls4cfi7gn8g48o0ioc15nl0au0ukvvuj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
