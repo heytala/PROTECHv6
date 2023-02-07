@@ -24,18 +24,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //
 
         loginText = (EditText) findViewById(R.id.login);
         passwordText = (EditText) findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.buttonLogin);
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        System.out.println("Width: " + width + "  " + "Height: " + height);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
