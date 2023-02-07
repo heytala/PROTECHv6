@@ -41,7 +41,7 @@
                             android:id="@+id/sensor_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Motion"
+                            android:text="Sensor"
                             android:textColor="@color/black"
                             android:textSize="22sp"
                             android:textStyle="bold"/>
@@ -67,11 +67,6 @@
                  android:text="Last Triggered: 8:35 pm"/>
 
             </RelativeLayout>
-
         </LinearLayout>
-
-
-
     </RelativeLayout>
-
 </LinearLayout>

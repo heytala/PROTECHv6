@@ -1,6 +1,9 @@
 package com.example.protechv6;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,10 +48,26 @@ public class SensorActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        databaseReference = firebaseDatabase.getReference("Sensor").child("button_state");
+        databaseReference   = firebaseDatabase.getReference("Sensor").child("button_state");
+        motion              = firebaseDatabase.getReference("Sensor").child("motion");
+        door                = firebaseDatabase.getReference("Sensor").child("door");
+        window              = firebaseDatabase.getReference("Sensor").child("window");
+        triggerEmergency    = firebaseDatabase.getReference("Sensor").child("triggerEmergency");
+        smoke               = firebaseDatabase.getReference("Sensor").child("smoke");
+
 
         retrieveTV = findViewById(R.id.idTVRetrieveData);
         getdata();
+
+        Button button = (Button) findViewById(R.id.buttonLogout);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 //        int[] imageId = {R.drawable.a};
 //        String[] sensor = {"Motion","Door","Window","Flame","Smoke","Video Surveillance"};
@@ -65,21 +84,6 @@ public class SensorActivity extends AppCompatActivity {
 //        ListAdapter listAdapter = new ListAdapter(SensorActivity.this,sensorArrayList);
 //        binding.listview.setAdapter(listAdapter);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -89,12 +93,11 @@ public class SensorActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 value = snapshot.getValue(String.class);
-
                 retrieveTV.setText(value);
 
-                int[] imageId = {R.drawable.a};
+                int[] imageId = {R.drawable.a, R.drawable.a, R.drawable.a, R.drawable.a, R.drawable.a, R.drawable.a};
                 String[] sensor = {"Motion","Door","Window","Flame","Smoke","Video Surveillance"};
-                String[] status = {"Status: " + value, "Status: " + value};
+                String[] status = {"Status: " + value, "Status: " + value, "Status: " + value, "Status: " + value, "Status: " + value, "Status: " + value};
                 String[] lastTriggered = {"8:45 pm","9:00 am","7:34 pm","6:32 am","5:76 am", "5:00 am"};
 
                 ArrayList<Sensors> sensorArrayList = new ArrayList<>();
