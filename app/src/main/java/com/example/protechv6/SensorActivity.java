@@ -12,9 +12,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.example.protechv6.databinding.ActivityMainBinding;
+import com.example.protechv6.databinding.ActivitySensorBinding;
+
+import java.util.ArrayList;
 
 public class SensorActivity extends AppCompatActivity {
 
+    ActivitySensorBinding binding;
 
     FirebaseDatabase firebaseDatabase;
 
@@ -28,10 +33,15 @@ public class SensorActivity extends AppCompatActivity {
 
     private TextView retrieveTV;
 
+    private static String value;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sensor);
+        binding = ActivitySensorBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        //setContentView(R.layout.activity_sensor);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 
@@ -39,6 +49,37 @@ public class SensorActivity extends AppCompatActivity {
 
         retrieveTV = findViewById(R.id.idTVRetrieveData);
         getdata();
+
+//        int[] imageId = {R.drawable.a};
+//        String[] sensor = {"Motion","Door","Window","Flame","Smoke","Video Surveillance"};
+//        String[] status = {"Status: " + value, "Status: " + value};
+//        String[] lastTriggered = {"8:45 pm","9:00 am","7:34 pm","6:32 am","5:76 am", "5:00 am"};
+//
+//        ArrayList<Sensors> sensorArrayList = new ArrayList<>();
+//
+//        for(int i = 0;i< imageId.length;i++){
+//            Sensors sensorsArr = new Sensors(sensor[i],status[i],lastTriggered[i],imageId[i]);
+//            sensorArrayList.add(sensorsArr);
+//        }
+//
+//        ListAdapter listAdapter = new ListAdapter(SensorActivity.this,sensorArrayList);
+//        binding.listview.setAdapter(listAdapter);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
@@ -47,9 +88,24 @@ public class SensorActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String value = snapshot.getValue(String.class);
+                value = snapshot.getValue(String.class);
 
                 retrieveTV.setText(value);
+
+                int[] imageId = {R.drawable.a};
+                String[] sensor = {"Motion","Door","Window","Flame","Smoke","Video Surveillance"};
+                String[] status = {"Status: " + value, "Status: " + value};
+                String[] lastTriggered = {"8:45 pm","9:00 am","7:34 pm","6:32 am","5:76 am", "5:00 am"};
+
+                ArrayList<Sensors> sensorArrayList = new ArrayList<>();
+
+                for(int i = 0;i< imageId.length;i++){
+                    Sensors sensorsArr = new Sensors(sensor[i],status[i],lastTriggered[i],imageId[i]);
+                    sensorArrayList.add(sensorsArr);
+                }
+
+                ListAdapter listAdapter = new ListAdapter(SensorActivity.this,sensorArrayList);
+                binding.listview.setAdapter(listAdapter);
             }
 
             @Override
