@@ -1,6 +1,7 @@
 package com.example.protechv6;
 
 import android.content.Intent;
+import android.icu.util.TimeZone;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public class SensorActivity extends AppCompatActivity {
 
     ActivitySensorBinding binding;
@@ -42,8 +44,6 @@ public class SensorActivity extends AppCompatActivity {
     DatabaseReference windowLtRef;
     DatabaseReference flameLtRef;
     DatabaseReference smokeLtRef;
-
-
 
     private TextView retrieveTV;
 
@@ -69,7 +69,8 @@ public class SensorActivity extends AppCompatActivity {
     private static String ltFlame   = " ";
     private static String ltSmoke   = " ";
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy ' ' HH:mm:ss z");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy ' ' HH:mm");
+
 
 
     @Override
