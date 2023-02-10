@@ -1,0 +1,53 @@
+[33mcommit fc845557ab9fff1915fe0ff1c4ce25725862acf0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31mPROTECHv6/master[m[33m)[m
+Author: Tala <kvillaroman07@yahoo.com.ph>
+Date:   Thu Feb 9 00:28:14 2023 +0800
+
+    Cleaned code, next is push notifications
+
+[33mcommit f1de07e8d48b3c475b95ac985746e6c1f3afadc0[m
+Author: Tala <kvillaroman07@yahoo.com.ph>
+Date:   Wed Feb 8 22:40:34 2023 +0800
+
+    Working list view that retrieves items from db. Needs code cleaning
+
+[33mcommit 2555cfae1051ced11ef2d9914c5d4b9bbb4efc71[m
+Author: Tala <kvillaroman07@yahoo.com.ph>
+Date:   Wed Feb 8 19:11:48 2023 +0800
+
+    Clean up code before coding retrieve value for each sensor
+
+[33mcommit 36eb86b7bb98e6f60164f38246c64aecf6cbfc4d[m
+Author: Tala <kvillaroman07@yahoo.com.ph>
+Date:   Wed Feb 8 03:39:55 2023 +0800
+
+    Added house layout image
+
+[33mcommit 648161032d9e2f1ece31917b4c7dd04b7edf2399[m
+Author: Tala <kvillaroman07@yahoo.com.ph>
+Date:   Wed Feb 8 02:48:28 2023 +0800
+
+    Added log out button
+
+[33mcommit d515f5b797001461cd49d379eb29c1d8559389d9[m
+Author: Tala <kvillaroman07@yahoo.com.ph>
+Date:   Wed Feb 8 01:08:56 2023 +0800
+
+    Retrives data from db on data change
+
+[33mcommit 889996131f646f5d7459fd22272b402d903e978c[m
+Author: Tala <kvillaroman07@yahoo.com.ph>
+Date:   Tue Feb 7 23:11:26 2023 +0800
+
+    List layout
+
+[33mcommit aba5a0a5ef8e41562c1613199d907233baaf7185[m
+Author: Tala <kvillaroman07@yahoo.com.ph>
+Date:   Tue Feb 7 22:39:04 2023 +0800
+
+    test
+
+[33mcommit 9b580a168724041ea70241dca701c278d7d94e69[m
+Author: Tala <kvillaroman07@yahoo.com.ph>
+Date:   Tue Feb 7 22:37:29 2023 +0800
+
+    Initial commit

@@ -1,7 +1,12 @@
 package com.example.protechv6;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.icu.util.TimeZone;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,6 +87,13 @@ public class SensorActivity extends AppCompatActivity {
 
         //setContentView(R.layout.activity_sensor);
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel
+                    ("MyNotification", "aaa", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
 
         firebaseDatabase         = FirebaseDatabase.getInstance();
 
@@ -138,6 +151,7 @@ public class SensorActivity extends AppCompatActivity {
                 value = snapshot.getValue(String.class);
                 retrieveTV.setText(value);
                 dataArr();
+                sendNotification();
             }
          @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -365,6 +379,27 @@ public class SensorActivity extends AppCompatActivity {
 
         return sensorArrayList;
 
+    }
+
+
+    private void sendNotification(){
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder
+                (SensorActivity.this,"MyNotification");
+        builder.setContentTitle("MyTitle");
+        builder.setContentText("test");
+        builder.setSmallIcon(R.drawable.ic_launcher_background);
+        builder.setAutoCancel(true);
+        //builder.setContentIntent(PendingIntent.getActivity(this,1,newIntent(),0));
+        //NotificationManager notificationManager=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        ////notificationManager.notify(0,builder.build());
+        builder.setContentIntent(PendingIntent.getActivity(this,1,new Intent(),PendingIntent.FLAG_IMMUTABLE));
+        NotificationManager notificationManager=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1,builder.build());
+
+        //NotificationManagerCompatmanagerCompat=NotificationManagerCompat.from(SensorActivity.this);
+        //managerCompat.notify(1,builder.build());
+        System.out.println("sendNotificationtriggered");
     }
 
 
