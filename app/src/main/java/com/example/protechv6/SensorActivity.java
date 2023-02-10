@@ -146,13 +146,13 @@ public class SensorActivity extends AppCompatActivity {
 
     private void getData() {
 
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 value = snapshot.getValue(String.class);
                 retrieveTV.setText(value);
                 dataArr();
-                sendNotification();
             }
          @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -248,6 +248,7 @@ public class SensorActivity extends AppCompatActivity {
                     motion = "Motion Detected!";
                     ltMotion = sdf.format(new Date());
                     motionLtRef.setValue(ltMotion);
+                    sendNotification("Motion", "Status: Motion Detected!");
                 } else if (motionVal == 0){
                     motion = "No Motion";
                 }
@@ -269,6 +270,7 @@ public class SensorActivity extends AppCompatActivity {
                     door = "Open";
                     ltDoor = sdf.format(new Date());
                     doorLtRef.setValue(ltDoor);
+                    sendNotification("Door", "Status: Door Open!");
                 } else if (doorVal == 0){
                     door = "Closed";
                 }
@@ -290,6 +292,7 @@ public class SensorActivity extends AppCompatActivity {
                     window = "Open";
                     ltWindow = sdf.format(new Date());
                     windowLtRef.setValue(ltWindow);
+                    sendNotification("Window", "Status: Window Open!");
                 } else if (windowVal == 0){
                     window = "Closed";
                 }
@@ -311,6 +314,7 @@ public class SensorActivity extends AppCompatActivity {
                     flame = "Flame Detected!";
                     ltFlame = sdf.format(new Date());
                     flameLtRef.setValue(ltFlame);
+                    sendNotification("Flame", "Flame Detected!");
                 } else if (flameVal == 1){
                     flame = "Normal";
                 }
@@ -336,6 +340,7 @@ public class SensorActivity extends AppCompatActivity {
                     smoke = "Lvl 3";
                     ltSmoke = sdf.format(new Date());
                     smokeLtRef.setValue(ltSmoke);
+                    sendNotification("Smoke","Status: Smoke Detected!");
                 }
                 dataArr();
             }
@@ -383,18 +388,17 @@ public class SensorActivity extends AppCompatActivity {
     }
 
 
-    private void sendNotification(){
+    private void sendNotification(String sensor, String status){
 
         Intent intent = new Intent(SensorActivity.this, SensorActivity.class);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder
                 (SensorActivity.this,"My Notification");
-        builder.setContentTitle("MyTitle");
-        builder.setContentText("test");
+        builder.setContentTitle(sensor);
+        builder.setContentText(status);
         builder.setSmallIcon(R.drawable.ic_launcher_background);
         builder.setAutoCancel(true);
         builder.setContentIntent(PendingIntent.getActivity(this,1,new Intent(intent),PendingIntent.FLAG_IMMUTABLE));
-
 
 
         NotificationManagerCompat managerCompat=NotificationManagerCompat.from(SensorActivity.this);
