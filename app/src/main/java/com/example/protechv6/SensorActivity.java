@@ -125,19 +125,25 @@ public class SensorActivity extends AppCompatActivity {
             }
         });
 
-/*        binding.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent i = new Intent(SensorActivity.this,VideoActivity.class);
-                i.putExtra("name",name[position]);
-                i.putExtra("phone",phoneNo[position]);
-                i.putExtra("country",country[position]);
-                i.putExtra("imageid",imageId[position]);
-                startActivity(i);
+                if (position == 5) {
+                    Intent i = new Intent(SensorActivity.this,VideoActivity.class);
+                    startActivity(i);
+                }
+                System.out.println(position);
+
+//                Intent i = new Intent(SensorActivity.this,VideoActivity.class);
+//                i.putExtra("name",name[position]);
+//                i.putExtra("phone",phoneNo[position]);
+//                i.putExtra("country",country[position]);
+//                i.putExtra("imageid",imageId[position]);
+//                startActivity(i);
 
             }
-        });*/
+        });
 
 
 
