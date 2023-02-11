@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                             (MainActivity.this,"Logged in as " + credentials.getCurrentUser(),Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), SensorActivity.class);
                     startActivity(intent);
+                    finish();
 
                 }else if(username.equals("Guest") && password.equals("guest")) {
                     credentials.setCurrentUser("Guest");
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                             (MainActivity.this,"Logged in as " + credentials.getCurrentUser(),Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), SensorActivity.class);
                     startActivity(intent);
+                    finish();
                 }
 
                 else {

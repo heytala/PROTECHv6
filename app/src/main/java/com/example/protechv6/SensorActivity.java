@@ -331,6 +331,7 @@ public class SensorActivity extends AppCompatActivity {
                     if (protech) {
                         buzzer = "1";
                         buzzerRef.setValue(buzzer);
+                        buzzerDialog();
                     }
 
                 } else if (windowVal == 0){
@@ -456,14 +457,15 @@ public class SensorActivity extends AppCompatActivity {
 
         builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
             // When the user click yes button then app will close
-            dialog.cancel();
             buzzer = "0";
             buzzerRef.setValue(buzzer);
+            dialog.dismiss();
+
         });
 
         builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
             // If user click no then dialog box is canceled.
-            dialog.cancel();
+            dialog.dismiss();
         });
 
         AlertDialog alertDialog = builder.create();
