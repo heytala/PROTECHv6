@@ -1,9 +1,11 @@
 package com.example.protechv6;
 
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.util.TimeZone;
 import android.os.Build;
@@ -11,6 +13,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +48,7 @@ public class SensorActivity extends AppCompatActivity {
     DatabaseReference windowRef;
     DatabaseReference flameRef;
     DatabaseReference smokeRef;
-    DatabaseReference triggerEmergencyRef;
+    DatabaseReference buzzerRef;
 
     DatabaseReference motionLtRef;
     DatabaseReference doorLtRef;
@@ -53,13 +57,15 @@ public class SensorActivity extends AppCompatActivity {
     DatabaseReference smokeLtRef;
 
     private TextView retrieveTV;
+    private TextView switchText;
+    private Switch switchView;
 
     private static int motionVal = 0;
     private static int doorVal = 0;
     private static int windowVal = 0;
     private static int flameVal = 0;
     private static int smokeVal = 0;
-    private static int triggerEmergencyVal = 0;
+    private static String buzzerVal = " ";
 
 
     private static String value;
@@ -68,7 +74,8 @@ public class SensorActivity extends AppCompatActivity {
     private static String window = " ";
     private static String flame = " ";
     private static String smoke = " ";
-    private static String triggerEmergency = " ";
+    private static String buzzer = " ";
+    private static boolean protech = true;
 
     private static String ltMotion  = " ";
     private static String ltDoor    = " ";
@@ -104,18 +111,21 @@ public class SensorActivity extends AppCompatActivity {
         windowRef                = firebaseDatabase.getReference("window").child("val");
         flameRef                 = firebaseDatabase.getReference("flame").child("val");
         smokeRef                 = firebaseDatabase.getReference("smoke").child("val");
-        triggerEmergencyRef      = firebaseDatabase.getReference("triggerEmergency").child("val");
+        buzzerRef                = firebaseDatabase.getReference("buzzer").child("val");
 
 
         motionLtRef              = firebaseDatabase.getReference("motion").child("lt");
         doorLtRef                = firebaseDatabase.getReference("door").child("lt");
         windowLtRef              = firebaseDatabase.getReference("window").child("lt");
-        flameLtRef              = firebaseDatabase.getReference("flame").child("lt");
+        flameLtRef               = firebaseDatabase.getReference("flame").child("lt");
         smokeLtRef               = firebaseDatabase.getReference("smoke").child("lt");
 
         retrieveTV = findViewById(R.id.idTVRetrieveData);
+
+//GET DATA FROM FIREBASE
         getData();
 
+//LOG OUT
         Button button = (Button) findViewById(R.id.buttonLogout);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +135,7 @@ public class SensorActivity extends AppCompatActivity {
             }
         });
 
+//NEW INTENT FOR VIDEO SURVEILLANCE
         binding.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -134,18 +145,27 @@ public class SensorActivity extends AppCompatActivity {
                     startActivity(i);
                 }
                 System.out.println(position);
-
-//                Intent i = new Intent(SensorActivity.this,VideoActivity.class);
-//                i.putExtra("name",name[position]);
-//                i.putExtra("phone",phoneNo[position]);
-//                i.putExtra("country",country[position]);
-//                i.putExtra("imageid",imageId[position]);
-//                startActivity(i);
-
             }
         });
 
-
+//SWITCH FOR PROTECH ON/OFF
+        switchView = findViewById(R.id.protechSwitch);
+        switchText = findViewById(R.id.switchText);
+        switchView.setChecked(true);
+        switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    protech = true;
+                    switchView.setChecked(true);
+                    System.out.println(protech);
+                } else {
+                    protech = false;
+                    switchView.setChecked(false);
+                    System.out.println(protech);
+                }
+            }
+        });
 
     }
 
@@ -277,6 +297,13 @@ public class SensorActivity extends AppCompatActivity {
                     ltDoor = sdf.format(new Date());
                     doorLtRef.setValue(ltDoor);
                     sendNotification("Door", "Status: Door Open!");
+
+                    //Triggers buzzer if Protech is ON
+                    if (protech) {
+                        buzzer = "1";
+                        buzzerRef.setValue(buzzer);
+                        buzzerDialog();
+                    }
                 } else if (doorVal == 0){
                     door = "Closed";
                 }
@@ -299,6 +326,13 @@ public class SensorActivity extends AppCompatActivity {
                     ltWindow = sdf.format(new Date());
                     windowLtRef.setValue(ltWindow);
                     sendNotification("Window", "Status: Window Open!");
+
+                    //Triggers buzzer if Protech is ON
+                    if (protech) {
+                        buzzer = "1";
+                        buzzerRef.setValue(buzzer);
+                    }
+
                 } else if (windowVal == 0){
                     window = "Closed";
                 }
@@ -356,17 +390,19 @@ public class SensorActivity extends AppCompatActivity {
             }
         });
 
-//GET TRIGGER EMERGENCY VALUE
-        triggerEmergencyRef.addValueEventListener(new ValueEventListener() {
+//GET BUZZER VALUE
+        buzzerRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                triggerEmergencyVal = snapshot.getValue(int.class);
+                buzzerVal = snapshot.getValue(String.class);
 
-                //Insert business logic
+                if (buzzer == "1") {
+
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(SensorActivity.this, "Fail to get data: TRIGGER EMERGENCY", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SensorActivity.this, "Fail to get data: BUZZER", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -410,6 +446,28 @@ public class SensorActivity extends AppCompatActivity {
         NotificationManagerCompat managerCompat=NotificationManagerCompat.from(SensorActivity.this);
         managerCompat.notify(1,builder.build());
         System.out.println("send Notification triggered");
+    }
+
+    private void buzzerDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SensorActivity.this);
+        builder.setMessage("Buzzer is currently active. Do you want to turn it off?");
+        builder.setTitle("Possible Theft!");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // When the user click yes button then app will close
+            dialog.cancel();
+            buzzer = "0";
+            buzzerRef.setValue(buzzer);
+        });
+
+        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // If user click no then dialog box is canceled.
+            dialog.cancel();
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }
