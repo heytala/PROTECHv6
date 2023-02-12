@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class SensorActivity extends AppCompatActivity {
+public class SensorActivity extends AppCompatActivity implements CreateUserDialog.ExampleDialogListener {
 
     ActivitySensorBinding binding;
 
@@ -49,6 +49,7 @@ public class SensorActivity extends AppCompatActivity {
     DatabaseReference flameRef;
     DatabaseReference smokeRef;
     DatabaseReference buzzerRef;
+    DatabaseReference passwordRef;
 
     DatabaseReference motionLtRef;
     DatabaseReference doorLtRef;
@@ -85,6 +86,8 @@ public class SensorActivity extends AppCompatActivity {
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy ' ' HH:mm");
 
+    private static String password;
+
 
 
     @Override
@@ -103,22 +106,23 @@ public class SensorActivity extends AppCompatActivity {
         }
 
 
-        firebaseDatabase         = FirebaseDatabase.getInstance();
+        firebaseDatabase        = FirebaseDatabase.getInstance();
 
-        databaseReference        = firebaseDatabase.getReference("Sensor").child("button_state");
-        motionRef                = firebaseDatabase.getReference("motion").child("val");
-        doorRef                  = firebaseDatabase.getReference("door").child("val");
-        windowRef                = firebaseDatabase.getReference("window").child("val");
-        flameRef                 = firebaseDatabase.getReference("flame").child("val");
-        smokeRef                 = firebaseDatabase.getReference("smoke").child("val");
-        buzzerRef                = firebaseDatabase.getReference("buzzer").child("val");
+        databaseReference       = firebaseDatabase.getReference("Sensor").child("button_state");
+        motionRef               = firebaseDatabase.getReference("motion").child("val");
+        doorRef                 = firebaseDatabase.getReference("door").child("val");
+        windowRef               = firebaseDatabase.getReference("window").child("val");
+        flameRef                = firebaseDatabase.getReference("flame").child("val");
+        smokeRef                = firebaseDatabase.getReference("smoke").child("val");
+        buzzerRef               = firebaseDatabase.getReference("buzzer").child("val");
 
+        passwordRef             = firebaseDatabase.getReference("User").child("password");
 
-        motionLtRef              = firebaseDatabase.getReference("motion").child("lt");
-        doorLtRef                = firebaseDatabase.getReference("door").child("lt");
-        windowLtRef              = firebaseDatabase.getReference("window").child("lt");
-        flameLtRef               = firebaseDatabase.getReference("flame").child("lt");
-        smokeLtRef               = firebaseDatabase.getReference("smoke").child("lt");
+        motionLtRef             = firebaseDatabase.getReference("motion").child("lt");
+        doorLtRef               = firebaseDatabase.getReference("door").child("lt");
+        windowLtRef             = firebaseDatabase.getReference("window").child("lt");
+        flameLtRef              = firebaseDatabase.getReference("flame").child("lt");
+        smokeLtRef              = firebaseDatabase.getReference("smoke").child("lt");
 
         retrieveTV = findViewById(R.id.idTVRetrieveData);
 
@@ -132,6 +136,15 @@ public class SensorActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+            }
+        });
+
+//CREATE NEW USER (ONLY APPLICABLE IF CURRENT USER IS ADMIN)
+        Button buttonCreateUser = (Button) findViewById(R.id.buttonCreateUser);
+        buttonCreateUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
             }
         });
 
@@ -472,4 +485,14 @@ public class SensorActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+
+    public void openDialog() {
+        CreateUserDialog userDialog = new CreateUserDialog();
+        userDialog.show(getSupportFragmentManager(), "Create New User");
+    }
+
+    @Override
+    public void applyTexts(String password) {
+        passwordRef.setValue(password);
+    }
 }
