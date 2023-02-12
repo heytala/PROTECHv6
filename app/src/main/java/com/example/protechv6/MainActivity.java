@@ -12,6 +12,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,11 +25,20 @@ public class MainActivity extends AppCompatActivity {
     Button btnLogin;
     Credentials credentials = new Credentials();
 
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference passwordRef;
+    private static String passwordDB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        firebaseDatabase    = FirebaseDatabase.getInstance();
+        passwordRef         = firebaseDatabase.getReference("User").child("password");
+
+        getPassword();
 
         loginText = (EditText) findViewById(R.id.login);
         passwordText = (EditText) findViewById(R.id.password);
@@ -44,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
 
-                }else if(username.equals("Guest") && password.equals("guest")) {
+                }else if(username.equals("Guest") && password.equals(passwordDB)) {
                     credentials.setCurrentUser("Guest");
                     Toast.makeText
                             (MainActivity.this,"Logged in as " + credentials.getCurrentUser(),Toast.LENGTH_SHORT).show();
@@ -60,6 +75,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getPassword() {
+        passwordRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                passwordDB = snapshot.getValue(String.class);
+                System.out.println("**************" + passwordDB);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("Fail to get data: PASSWORD");
+            }
+        });
     }
 
 }
