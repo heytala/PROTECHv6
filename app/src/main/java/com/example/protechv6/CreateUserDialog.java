@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,21 +38,23 @@ public class CreateUserDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        String password = editTextPassword.getText().toString();
-                        String passwordConfirm = editTextPasswordConfirm.getText().toString();
-
-                        System.out.println(password);
-                        System.out.println(passwordConfirm);
-
-                        if (password.equals(passwordConfirm)) {
-                            listener.applyTexts(password);
-                            System.out.println("***************Listener applied password");
-                            Toast.makeText
-                                    (getContext(),"User Created",Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText
-                                    (getContext(),"Passwords do not Match!",Toast.LENGTH_LONG).show();
-                        }
+//                        String password = editTextPassword.getText().toString();
+//                        String passwordConfirm = editTextPasswordConfirm.getText().toString();
+//
+//                        System.out.println(password);
+//                        System.out.println(passwordConfirm);
+//
+//
+//
+//                        if (password.equals(passwordConfirm)) {
+//                            listener.applyTexts(password);
+//                            System.out.println("***************Listener applied password");
+//                            Toast.makeText
+//                                    (getContext(),"User Created",Toast.LENGTH_LONG).show();
+//                        } else {
+//                            Toast.makeText
+//                                    (getContext(),"Passwords do not Match!",Toast.LENGTH_LONG).show();
+//                        }
 
                     }
                 });
@@ -65,6 +68,42 @@ public class CreateUserDialog extends AppCompatDialogFragment {
     }
 
     @Override
+    public void onResume()
+    {
+        super.onResume();
+        final AlertDialog d = (AlertDialog)getDialog();
+        if(d != null)
+        {
+            Button positiveButton = (Button) d.getButton(Dialog.BUTTON_POSITIVE);
+            positiveButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    String password = editTextPassword.getText().toString();
+                    String passwordConfirm = editTextPasswordConfirm.getText().toString();
+
+                    System.out.println(password);
+                    System.out.println(passwordConfirm);
+
+
+                    if (password.equals(passwordConfirm) && !password.isEmpty()) {
+                        listener.applyTexts(password);
+                        System.out.println("***************Listener applied password");
+                        d.dismiss();
+
+                        Toast.makeText
+                                (getContext(),"User Created",Toast.LENGTH_LONG).show();
+                    } else {
+//                        Toast.makeText
+//                                (getContext(),"Passwords do not Match!",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
@@ -75,6 +114,7 @@ public class CreateUserDialog extends AppCompatDialogFragment {
                     "must implement ExampleDialogListener");
         }
     }
+
 
     public interface ExampleDialogListener {
         void applyTexts(String password);

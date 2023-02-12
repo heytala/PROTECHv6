@@ -501,6 +501,9 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
     public void openDialog() {
         CreateUserDialog userDialog = new CreateUserDialog();
         userDialog.show(getSupportFragmentManager(), "Create New User");
+
+
+
     }
 
     @Override

@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 String username = loginText.getText().toString();
                 String password = passwordText.getText().toString();
 
-
-
                 if(username.equals("Admin") && password.equals("admin")) {
                     credentials.setCurrentUser("Admin");
                     Toast.makeText
