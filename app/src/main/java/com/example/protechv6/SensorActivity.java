@@ -320,9 +320,11 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                     motion = "Motion Detected!";
                     ltMotion = sdf.format(new Date());
                     motionLtRef.setValue(ltMotion);
+                    motionImg = R.drawable.protech_logo_red;
                     sendNotification("Motion", "Status: Motion Detected!");
                 } else if (motionVal == 0){
                     motion = "No Motion";
+                    motionImg = R.drawable.protech_logo;
                 }
                 dataArr();
             }
@@ -342,16 +344,19 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                     door = "Open";
                     ltDoor = sdf.format(new Date());
                     doorLtRef.setValue(ltDoor);
+                    doorImg = R.drawable.protech_logo_red;
                     sendNotification("Door", "Status: Door Open!");
 
                     //Triggers buzzer if Protech is ON
                     if (protech) {
                         buzzer = "1";
+                        door = "Open (Buzzer is Active)";
                         buzzerRef.setValue(buzzer);
                         buzzerDialog();
                     }
                 } else if (doorVal == 0){
                     door = "Closed";
+                    doorImg = R.drawable.protech_logo;
                 }
                 dataArr();
             }
@@ -371,17 +376,21 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                     window = "Open";
                     ltWindow = sdf.format(new Date());
                     windowLtRef.setValue(ltWindow);
+                    windowImg = R.drawable.protech_logo_red;
                     sendNotification("Window", "Status: Window Open!");
 
                     //Triggers buzzer if Protech is ON
                     if (protech) {
                         buzzer = "1";
+                        window = "Open (Buzzer is Active)";
                         buzzerRef.setValue(buzzer);
                         buzzerDialog();
                     }
 
                 } else if (windowVal == 0){
                     window = "Closed";
+                    windowImg = R.drawable.protech_logo;
+
                 }
                 dataArr();
             }
@@ -401,9 +410,11 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                     flame = "Flame Detected!";
                     ltFlame = sdf.format(new Date());
                     flameLtRef.setValue(ltFlame);
+                    flameImg = R.drawable.protech_logo_red;
                     sendNotification("Flame", "Flame Detected!");
                 } else if (flameVal == 1){
                     flame = "Normal";
+                    flameImg = R.drawable.protech_logo;
                 }
                 dataArr();
             }
@@ -421,12 +432,15 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
 
                 if (smokeVal == 1) {
                     smoke = "Lvl 1 (Normal)";
+                    smokeImg = R.drawable.protech_logo;
                 } else if (smokeVal == 2){
                     smoke = "Lvl 2";
+                   smokeImg = R.drawable.protech_logo_yellow;
                 } else if (smokeVal == 3){
                     smoke = "Lvl 3";
                     ltSmoke = sdf.format(new Date());
                     smokeLtRef.setValue(ltSmoke);
+                    smokeImg = R.drawable.protech_logo_red;
                     sendNotification("Smoke","Status: Smoke Detected!");
                 }
                 dataArr();
@@ -505,6 +519,9 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
             // When the user click yes button then app will close
             buzzer = "0";
             buzzerRef.setValue(buzzer);
+            door = "Open";
+            window = "Open";
+            dataArr();
             dialog.dismiss();
 
         });
