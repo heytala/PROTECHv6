@@ -160,12 +160,26 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
             }
         });
 
-//NEW INTENT FOR VIDEO SURVEILLANCE
+//LIST ITEM ACTIONS
         binding.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    //BUZZER DIALOG FOR DOOR
+                if(position == 1) {
+                    if (buzzer == "1") {
+                        buzzerDialog();
+                    }
+                }
 
-                if (position == 5) {
+    //BUZZER DIALOG FOR WINDOW
+                else if (position == 2) {
+                    if (buzzer == "1") {
+                        buzzerDialog();
+                    }
+                }
+
+    //NEW INTENT FOR VIDEO SURVEILLANCE
+                else if (position == 5) {
                     Intent i = new Intent(SensorActivity.this,VideoActivity.class);
                     startActivity(i);
                 }
