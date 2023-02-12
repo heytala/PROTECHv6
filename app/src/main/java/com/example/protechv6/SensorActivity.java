@@ -57,9 +57,15 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
     DatabaseReference flameLtRef;
     DatabaseReference smokeLtRef;
 
+    Credentials credentials = new Credentials();
+    String currentUser = credentials.getCurrentUser();
+
+    private TextView currentUserTextView;
     private TextView retrieveTV;
     private TextView switchText;
     private Switch switchView;
+
+
 
     private static int motionVal = 0;
     private static int doorVal = 0;
@@ -126,6 +132,9 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
 
         retrieveTV = findViewById(R.id.idTVRetrieveData);
 
+        currentUserTextView = (TextView) findViewById(R.id.currentUser);
+        currentUserTextView.setText(currentUser);
+
 //GET DATA FROM FIREBASE
         getData();
 
@@ -141,6 +150,9 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
 
 //CREATE NEW USER (ONLY APPLICABLE IF CURRENT USER IS ADMIN)
         Button buttonCreateUser = (Button) findViewById(R.id.buttonCreateUser);
+        if (currentUser != "Admin") {
+            buttonCreateUser.setVisibility(View.GONE);
+        }
         buttonCreateUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

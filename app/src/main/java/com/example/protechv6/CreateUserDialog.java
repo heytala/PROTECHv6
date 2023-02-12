@@ -46,6 +46,8 @@ public class CreateUserDialog extends AppCompatDialogFragment {
                         if (password.equals(passwordConfirm)) {
                             listener.applyTexts(password);
                             System.out.println("***************Listener applied password");
+                            Toast.makeText
+                                    (getContext(),"User Created",Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText
                                     (getContext(),"Passwords do not Match!",Toast.LENGTH_LONG).show();

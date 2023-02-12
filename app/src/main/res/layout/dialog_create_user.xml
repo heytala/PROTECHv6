@@ -8,7 +8,8 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username" />
+        android:hint="Username: User"
+        android:textSize="16dp"/>
 
     <EditText
         android:id="@+id/edit_password"
