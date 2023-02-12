@@ -95,6 +95,21 @@
         tools:context=".SensorActivity">
 
         <Button
+            android:id="@+id/buttonCreateUser"
+            android:layout_width="140dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+
+            android:backgroundTint="@color/white"
+            android:text="Create User"
+            android:textAllCaps="false"
+            android:textColor="@color/navy_blue"
+            android:stateListAnimator="@null"
+            android:textSize="16dp" />
+
+        <Button
             android:id="@+id/buttonLogout"
             android:layout_width="100dp"
             android:layout_height="48dp"
@@ -113,7 +128,7 @@
             android:id="@+id/currentUser"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-
+            android:layout_toRightOf="@id/buttonCreateUser"
             android:text="Tala" />
 
         <TextView
@@ -123,7 +138,8 @@
             android:text="Retrieve Data"
             android:textColor="@color/purple_500"
             android:textSize="18sp"
-            android:layout_below="@id/currentUser"/>
+            android:layout_below="@id/currentUser"
+            android:layout_toRightOf="@id/buttonCreateUser"/>
     </RelativeLayout>
 
 
