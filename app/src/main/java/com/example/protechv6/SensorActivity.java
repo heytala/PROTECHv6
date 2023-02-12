@@ -499,7 +499,7 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                 (SensorActivity.this,"My Notification");
         builder.setContentTitle(sensor);
         builder.setContentText(status);
-        builder.setSmallIcon(R.drawable.ic_launcher_background);
+        builder.setSmallIcon(R.drawable.protech_logo_red);
         builder.setAutoCancel(true);
         builder.setContentIntent(PendingIntent.getActivity(this,1,new Intent(intent),PendingIntent.FLAG_IMMUTABLE));
 
