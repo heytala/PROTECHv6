@@ -6,17 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/idTVRetrieveData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="193dp"
-        android:text="Retrieve Data"
-        android:textAlignment="center"
-        android:textColor="@color/purple_500"
-        android:textSize="18sp" />
+
 
     <TextView
         android:id="@+id/login_text"

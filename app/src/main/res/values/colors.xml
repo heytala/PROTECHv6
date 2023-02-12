@@ -10,4 +10,9 @@
 
     <color name="cream">#F8F9F4</color>
     <color name="navy_blue">#354159</color>
+    <color name="royal_blue">#122C4C</color>
+    <color name="light_black">#373A3F</color>
+
+    <color name="pale_blue">#839AAA</color>
+
 </resources>

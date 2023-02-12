@@ -90,6 +90,8 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
     private static String ltFlame   = " ";
     private static String ltSmoke   = " ";
 
+    private static int test = R.drawable.a;
+
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy ' ' HH:mm");
 
     private static String password;
