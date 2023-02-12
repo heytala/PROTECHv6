@@ -90,7 +90,12 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
     private static String ltFlame   = " ";
     private static String ltSmoke   = " ";
 
-    private static int test = R.drawable.a;
+    private static int motionImg    = R.drawable.protech_logo;
+    private static int doorImg      = R.drawable.protech_logo;
+    private static int windowImg    = R.drawable.protech_logo;
+    private static int flameImg     = R.drawable.protech_logo;
+    private static int smokeImg     = R.drawable.protech_logo;
+    private static int videoImg     = R.drawable.protech_logo;
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy ' ' HH:mm");
 
@@ -451,7 +456,7 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
     }
 
     private ArrayList dataArr() {
-        int[] imageId = {R.drawable.a, R.drawable.a, R.drawable.a, R.drawable.a, R.drawable.a, R.drawable.a};
+        int[] imageId = {motionImg, doorImg, windowImg, flameImg, smokeImg, videoImg};
         String[] sensor = {"Motion","Door","Window","Flame","Smoke","Video Surveillance"};
         String[] status = {"Status: " + motion, "Status: " + door, "Status: " + window, "Status: " + flame, "Status: " + smoke, "Status: Running"};
         String[] lastTriggered = {ltMotion,ltDoor,ltWindow,ltFlame,ltSmoke, " "};
