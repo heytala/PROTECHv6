@@ -80,6 +80,7 @@
             android:layout_height="278dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:textColor="@color/black"
             tools:listitem="@layout/list_item" />
 
 

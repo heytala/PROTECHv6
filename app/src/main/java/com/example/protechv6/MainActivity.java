@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 passwordDB = snapshot.getValue(String.class);
-                System.out.println("**************" + passwordDB);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

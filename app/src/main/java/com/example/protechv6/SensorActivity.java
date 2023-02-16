@@ -350,7 +350,7 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                     //Triggers buzzer if Protech is ON
                     if (protech) {
                         buzzer = "1";
-                        door = "Open (Buzzer is Active)";
+                        door = "Open (Buzzer ON)";
                         buzzerRef.setValue(buzzer);
                         buzzerDialog();
                     }
@@ -382,7 +382,7 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                     //Triggers buzzer if Protech is ON
                     if (protech) {
                         buzzer = "1";
-                        window = "Open (Buzzer is Active)";
+                        window = "Open (Buzzer ON)";
                         buzzerRef.setValue(buzzer);
                         buzzerDialog();
                     }
