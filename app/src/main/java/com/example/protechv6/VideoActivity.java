@@ -21,7 +21,7 @@ public class VideoActivity extends AppCompatActivity {
         WebSettings webSettings = web.getSettings();
         webSettings.setJavaScriptEnabled(true);
         web.setWebViewClient(new Callback());
-        web.loadUrl("http://facebook.com");
+        web.loadUrl("https://75b5-136-158-82-225.ap.ngrok.io");
     }
 
     private class Callback extends WebViewClient {
