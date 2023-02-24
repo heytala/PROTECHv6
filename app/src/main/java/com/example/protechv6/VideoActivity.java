@@ -19,9 +19,11 @@ public class VideoActivity extends AppCompatActivity {
 
         web = findViewById(R.id.webView);
         WebSettings webSettings = web.getSettings();
+        web.getSettings().setLoadWithOverviewMode(true);
+        web.getSettings().setUseWideViewPort(true);
         webSettings.setJavaScriptEnabled(true);
         web.setWebViewClient(new Callback());
-        web.loadUrl("https://75b5-136-158-82-225.ap.ngrok.io");
+        web.loadUrl("https://protech.ap.ngrok.io");
     }
 
     private class Callback extends WebViewClient {
