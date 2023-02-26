@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
 
-                }else if(username.equals("Guest") && password.equals(passwordDB)) {
-                    credentials.setCurrentUser("Guest");
+                }else if(username.equals("User") && password.equals(passwordDB)) {
+                    credentials.setCurrentUser("User");
                     Toast.makeText
                             (MainActivity.this,"Logged in as " + credentials.getCurrentUser(),Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), SensorActivity.class);

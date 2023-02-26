@@ -60,8 +60,7 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
     Credentials credentials = new Credentials();
     String currentUser = credentials.getCurrentUser();
 
-    private TextView currentUserTextView;
-    private TextView retrieveTV;
+    //private TextView currentUserTextView;
     private TextView switchText;
     private Switch switchView;
 
@@ -137,10 +136,9 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
         flameLtRef              = firebaseDatabase.getReference("flame").child("lt");
         smokeLtRef              = firebaseDatabase.getReference("smoke").child("lt");
 
-        retrieveTV = findViewById(R.id.idTVRetrieveData);
 
-        currentUserTextView = (TextView) findViewById(R.id.currentUser);
-        currentUserTextView.setText(currentUser);
+        //currentUserTextView = (TextView) findViewById(R.id.currentUser);
+        //currentUserTextView.setText(currentUser);
 
 //GET DATA FROM FIREBASE
         getData();
@@ -217,20 +215,6 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
 
 
     private void getData() {
-
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                value = snapshot.getValue(String.class);
-                retrieveTV.setText(value);
-                dataArr();
-            }
-         @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(SensorActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
-            }
-        });
 
 //GET DATE AND TIME LAST TRIGGERED: MOTION
         motionLtRef.addValueEventListener(new ValueEventListener() {
@@ -547,5 +531,10 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
     @Override
     public void applyTexts(String password) {
         passwordRef.setValue(password);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
     }
 }

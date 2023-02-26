@@ -17,6 +17,7 @@ public class CreateUserDialog extends AppCompatDialogFragment {
     private TextView textViewUsername;
     private EditText editTextPassword;
     private EditText editTextPasswordConfirm;
+    private TextView textViewError;
     private ExampleDialogListener listener;
 
     @Override
@@ -62,6 +63,7 @@ public class CreateUserDialog extends AppCompatDialogFragment {
         textViewUsername = view.findViewById(R.id.username);
         editTextPassword = view.findViewById(R.id.edit_password);
         editTextPasswordConfirm = view.findViewById(R.id.edit_passwordConfirm);
+        textViewError = view.findViewById(R.id.error_text);
 
         return builder.create();
 
@@ -86,17 +88,20 @@ public class CreateUserDialog extends AppCompatDialogFragment {
                     System.out.println(password);
                     System.out.println(passwordConfirm);
 
-
-                    if (password.equals(passwordConfirm) && !password.isEmpty()) {
-                        listener.applyTexts(password);
+                //PASSWORD VALIDATION
+                    if (!password.equals(passwordConfirm)) {
+                        textViewError.setText("Passwords do not match");
+                    } else if (password.isEmpty()) {
+                        textViewError.setText("Password cannot be Empty");
+                    } else if (password.length() < 6) {
+                        textViewError.setText("Password too short");
+                    } else {
+                      listener.applyTexts(password);
                         System.out.println("***************Listener applied password");
                         d.dismiss();
 
                         Toast.makeText
                                 (getContext(),"User Created",Toast.LENGTH_LONG).show();
-                    } else {
-//                        Toast.makeText
-//                                (getContext(),"Passwords do not Match!",Toast.LENGTH_LONG).show();
                     }
                 }
             });

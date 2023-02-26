@@ -31,4 +31,14 @@
         android:inputType="textPassword"
         android:layout_marginTop="20dp"/>
 
+    <TextView
+        android:id="@+id/error_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint=" "
+        android:layout_below="@id/edit_passwordConfirm"
+        android:textSize="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"/>
+
 </RelativeLayout>
