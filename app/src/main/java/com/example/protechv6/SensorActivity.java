@@ -426,6 +426,13 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                     smokeLtRef.setValue(ltSmoke);
                     smokeImg = R.drawable.protech_logo_red;
                     sendNotification("Smoke","Status: Smoke Detected!");
+
+                    if (protech) {
+                        buzzer = "1";
+                        window = "Open (Buzzer ON)";
+                        buzzerRef.setValue(buzzer);
+                        buzzerDialog();
+                    }
                 }
                 dataArr();
             }
