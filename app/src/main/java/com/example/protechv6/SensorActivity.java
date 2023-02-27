@@ -35,6 +35,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import pl.droidsonroids.gif.GifImageView;
+
 
 public class SensorActivity extends AppCompatActivity implements CreateUserDialog.ExampleDialogListener {
 
@@ -63,6 +65,7 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
     //private TextView currentUserTextView;
     private TextView switchText;
     private Switch switchView;
+    private GifImageView red_blink;
 
 
 
@@ -136,9 +139,11 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
         flameLtRef              = firebaseDatabase.getReference("flame").child("lt");
         smokeLtRef              = firebaseDatabase.getReference("smoke").child("lt");
 
-
         //currentUserTextView = (TextView) findViewById(R.id.currentUser);
         //currentUserTextView.setText(currentUser);
+
+        red_blink = (GifImageView) findViewById(R.id.red_blink);
+        //red_blink.setVisibility(View.INVISIBLE);
 
 //GET DATA FROM FIREBASE
         getData();
@@ -447,11 +452,15 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 buzzerVal = snapshot.getValue(String.class);
+                System.out.println("BuzzerVal " + buzzerVal);
 
-                if (buzzer == "1") {
-
+                if (buzzerVal == "1") {
+                    red_blink.setVisibility(View.VISIBLE);
+                } else if (buzzerVal == "0") {
+                    red_blink.setVisibility(View.INVISIBLE);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(SensorActivity.this, "Fail to get data: BUZZER", Toast.LENGTH_SHORT).show();
