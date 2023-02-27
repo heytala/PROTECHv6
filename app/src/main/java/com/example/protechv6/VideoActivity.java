@@ -3,12 +3,14 @@ package com.example.protechv6;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -48,24 +50,15 @@ public class VideoActivity extends AppCompatActivity {
         buzzerRefSingle         = firebaseDatabase.getReference("buzzer").child("val");
         red_blink               = (GifImageView) findViewById(R.id.red_blink);
 
-//        buzzerRefSingle.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                buzzerValSingle = snapshot.getValue(String.class);
-//                System.out.println("BuzzerValVideo2 " + buzzerValSingle);
-//
-//                if (buzzerValSingle == "1") {
-//                    red_blink.setVisibility(View.VISIBLE);
-//                } else if (buzzerValSingle == "0") {
-//                    red_blink.setVisibility(View.INVISIBLE);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(VideoActivity.this, "Fail to get data: BUZZER", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        //LOG OUT
+        Button button = (Button) findViewById(R.id.buttonLogout);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         getBuzzerData();
 
