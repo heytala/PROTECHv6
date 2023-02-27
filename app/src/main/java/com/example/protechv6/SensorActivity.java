@@ -454,9 +454,9 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                 buzzerVal = snapshot.getValue(String.class);
                 System.out.println("BuzzerVal " + buzzerVal);
 
-                if (buzzerVal == "1") {
+                if (buzzerVal.equals("1")) {
                     red_blink.setVisibility(View.VISIBLE);
-                } else if (buzzerVal == "0") {
+                } else if (buzzerVal.equals("0")) {
                     red_blink.setVisibility(View.INVISIBLE);
                 }
             }
