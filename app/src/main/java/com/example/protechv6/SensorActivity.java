@@ -188,6 +188,12 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                     }
                 }
 
+    //BUZZER DIALOG FOR SMOKE
+                else if (position == 4) {
+                    if (buzzer == "1") {
+                        buzzerDialog();
+                    }
+                }
     //NEW INTENT FOR VIDEO SURVEILLANCE
                 else if (position == 5) {
                     Intent i = new Intent(SensorActivity.this,VideoActivity.class);

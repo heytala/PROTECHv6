@@ -51,11 +51,23 @@ public class VideoActivity extends AppCompatActivity {
         red_blink               = (GifImageView) findViewById(R.id.red_blink);
 
         //LOG OUT
-        Button button = (Button) findViewById(R.id.buttonLogout);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button buttonLogout = (Button) findViewById(R.id.buttonLogout);
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                web.destroy();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //BACK
+        Button buttonBack = (Button) findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                web.destroy();
+                Intent intent = new Intent(getApplicationContext(), SensorActivity.class);
                 startActivity(intent);
             }
         });
@@ -97,4 +109,10 @@ public class VideoActivity extends AppCompatActivity {
     }
 
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        web.destroy();
+    }
 }
