@@ -94,10 +94,8 @@ public class VideoActivity extends AppCompatActivity {
 
                 if (buzzerVal.equals("1")) {
                     red_blink.setVisibility(View.VISIBLE);
-                    System.out.println("done 1");
                 } else if (buzzerVal.equals("1")) {
                     red_blink.setVisibility(View.INVISIBLE);
-                    System.out.println("done 2");
                 }
             }
 

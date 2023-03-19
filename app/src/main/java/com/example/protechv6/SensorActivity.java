@@ -177,21 +177,21 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
     //BUZZER DIALOG FOR DOOR
                 if(position == 1) {
                     if (buzzer == "1") {
-                        buzzerDialog();
+                        buzzerDialog("Possible Theft!");
                     }
                 }
 
     //BUZZER DIALOG FOR WINDOW
                 else if (position == 2) {
                     if (buzzer == "1") {
-                        buzzerDialog();
+                        buzzerDialog("Possible Theft!");
                     }
                 }
 
     //BUZZER DIALOG FOR SMOKE
                 else if (position == 4) {
                     if (buzzer == "1") {
-                        buzzerDialog();
+                        buzzerDialog("Possible Fire Outbreak!");
                     }
                 }
     //NEW INTENT FOR VIDEO SURVEILLANCE
@@ -347,7 +347,7 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                         buzzer = "1";
                         door = "Open (Buzzer ON)";
                         buzzerRef.setValue(buzzer);
-                        buzzerDialog();
+                        buzzerDialog("Possible Theft!");
                     }
                 } else if (doorVal == 0){
                     door = "Closed";
@@ -379,7 +379,7 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                         buzzer = "1";
                         window = "Open (Buzzer ON)";
                         buzzerRef.setValue(buzzer);
-                        buzzerDialog();
+                        buzzerDialog("Possible Theft!");
                     }
 
                 } else if (windowVal == 0){
@@ -442,7 +442,7 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
                         buzzer = "1";
                         window = "Open (Buzzer ON)";
                         buzzerRef.setValue(buzzer);
-                        buzzerDialog();
+                        buzzerDialog("Possible Fire Outbreak!");
                     }
                 }
                 dataArr();
@@ -515,10 +515,10 @@ public class SensorActivity extends AppCompatActivity implements CreateUserDialo
         System.out.println("send Notification triggered");
     }
 
-    private void buzzerDialog() {
+    private void buzzerDialog(String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(SensorActivity.this);
         builder.setMessage("Buzzer is currently active. Do you want to turn it off?");
-        builder.setTitle("Possible Theft!");
+        builder.setTitle(title);
         builder.setCancelable(false);
 
         builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
